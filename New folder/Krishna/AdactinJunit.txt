@@ -1,0 +1,111 @@
+package org.task;
+
+import java.io.IOException;
+import java.util.Date;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class JUnit extends BaseClass {
+
+	@Rule
+	public TestName testName = new TestName();
+
+	@BeforeClass
+	public static void launchUrl() {
+		launchChrome();
+		getUrl("https://adactinhotelapp.com/");
+		maximize();
+		sleep(3000);
+	}
+
+	@Before
+	public void time() {
+		Date date = new Date();
+		System.out.println(date);
+	}
+
+	@Test
+	public void Tc001() {
+		xpathSend("//input[@id='username']", "manoj61988");
+		xpathSend("//input[@id='password']", "Krish@61988");
+		xpathClick("//input[@id='login']");
+		sleep(3000);
+	}
+
+	@Test
+	public void Tc002() throws IOException {
+		BaseClass a = new JUnit();
+		String dataFromExcel = a.getDataFromExcel(1, 1);
+		xpathSend("//select[@id='location']", dataFromExcel);
+		String dataFromExcel1 = a.getDataFromExcel(1, 2);
+		xpathSend("//select[@id='hotels']", dataFromExcel1);
+		String dataFromExcel2 = a.getDataFromExcel(1, 3);
+		xpathSend("//select[@id='room_type']", dataFromExcel2);
+		String dataFromExcel3 = a.getDataFromExcel(1, 4);
+		xpathSend("//select[@id='room_nos']", dataFromExcel3);
+		// String dataFromExcel4 = a.getDataFromExcel(1, 5);
+		xpathSend("//input[@value='20/03/2022']", "20/03/2022");
+		// String dataFromExcel5 = a.getDataFromExcel(1, 6);
+		xpathSend("//input[@value='21/03/2022']", "21/03/2022");
+		String dataFromExcel6 = a.getDataFromExcel(1, 7);
+		xpathSend("//select[@id='adult_room']", dataFromExcel6);
+		String dataFromExcel7 = a.getDataFromExcel(1, 8);
+		xpathSend("//select[@id='child_room']", dataFromExcel7);
+		xpathClick("//input[@id='Submit']");
+		sleep(3000);
+	}
+
+	@Test
+	public void Tc003() {
+		xpathClick("//input[@id='radiobutton_0']");
+		xpathClick("//input[@id='continue']");
+		sleep(3000);
+	}
+
+	@Test
+	public void Tc004() throws IOException {
+		BaseClass a = new JUnit();
+		String dataFromExcel8 = a.getDataFromExcel(1, 9);
+		xpathSend("//input[@id='first_name']", dataFromExcel8);
+		String dataFromExcel9 = a.getDataFromExcel(1, 10);
+		xpathSend("//input[@id='last_name']", dataFromExcel9);
+		String dataFromExcel10 = a.getDataFromExcel(1, 12);
+		xpathSend("//input[@id='cc_num']", dataFromExcel10);
+		String dataFromExcel11 = a.getDataFromExcel(1, 13);
+		xpathSend("//input[@id='cc_cvv']", dataFromExcel11);
+		String dataFromExcel12 = a.getDataFromExcel(1, 11);
+		xpathSend("//textarea[@id='address']", dataFromExcel12);
+		String dataFromExcel13 = a.getDataFromExcel(1, 14);
+		xpathSend("//select[@id='cc_type']", dataFromExcel13);
+		String dataFromExcel14 = a.getDataFromExcel(1, 15);
+		xpathSend("//select[@id='cc_exp_month']", dataFromExcel14);
+		String dataFromExcel15 = a.getDataFromExcel(1, 16);
+		xpathSend("//select[@id='cc_exp_year']", dataFromExcel15);
+		xpathClick("//input[@id='book_now']");
+		sleep(8000);
+	}
+
+	@After
+	public void after() {
+		Date date = new Date();
+		System.out.println(date);
+		String methodName = testName.getMethodName();
+		screenshot("D:\\Krishna\\JAVA\\Krishna\\ScreenShots\\" + methodName + ".png");
+	}
+
+	@AfterClass
+	public static void afterClass() {
+		driver.close();
+	}
+
+}
